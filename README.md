@@ -1,4 +1,4 @@
 duckpan-docker
 ==============
 
-A Docker file for installing DuckPAN.
+A Dockerfile for installing DuckPAN.
