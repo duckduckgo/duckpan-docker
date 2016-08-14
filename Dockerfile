@@ -29,7 +29,6 @@ RUN perl -v
 RUN cpanm --version
 
 # Install DuckPAN
-
 RUN cpanm --notest --mirror http://www.cpan.org/ --mirror http://duckpan.org Term::ReadKey@2.32
 
 # RUN useradd -ms /bin/bash ddg
@@ -38,6 +37,7 @@ RUN cpanm --notest --mirror http://www.cpan.org/ --mirror http://duckpan.org Ter
 # ENV USER ddg
 
 RUN cpanm --notest --skip-installed --mirror http://www.cpan.org/ --mirror http://duckpan.org App::DuckPAN 
+
 # Clone repositories and install their dependencies
 RUN git clone https://github.com/duckduckgo/zeroclickinfo-goodies.git
 RUN cd zeroclickinfo-goodies &&\
@@ -54,7 +54,16 @@ RUN cd zeroclickinfo-spice &&\
     dzil authordeps | grep -ve '^\W' | xargs -n 5 -P 10 cpanm --notest --mirror http://www.cpan.org/ --mirror http://duckpan.org &&\
     dzil listdeps | grep -ve '^\W' | cpanm --mirror http://www.cpan.org/ --mirror http://duckpan.org &&\
     cd .. && rm -rf zeroclickinfo-spice
+
+RUN git clone https://github.com/duckduckgo/zeroclickinfo-fathead.git
+RUN cd zeroclickinfo-fathead &&\
+    dzil authordeps | grep -ve '^\W' | xargs -n 5 -P 10 cpanm --notest --mirror http://www.cpan.org/ --mirror http://duckpan.org &&\
+    dzil listdeps | grep -ve '^\W' | cpanm --mirror http://www.cpan.org/ --mirror http://duckpan.org &&\
+    cd .. && rm -rf zeroclickinfo-fathead
+
 RUN duckpan check
+# Clean out downloaded modules.
+RUN rm -r /root/.cpanm/latest-build/*
 
 WORKDIR /home/ddg
 VOLUME /home/ddg
