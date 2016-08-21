@@ -28,7 +28,7 @@ $ # Checkout your own fork. e.g.
 $ cd ~/projects && git clone https://github.com/soleo/zeroclickinfo-spice.git
 $ # Bash from container
 $ docker run -ti -p 5000:5000 -v ~/projects/zeroclickinfo-spice:/home/ddg/zeroclickinfo-spice --rm soleo/duckpan bash
-# duckpan server
+# cd /home/ddg/zeroclickinfo-spice && duckpan server
 ```
 
 Start hacking and building new feature from there! You can visit ``localhost:5000`` to test your stuff now.
