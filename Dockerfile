@@ -11,10 +11,10 @@ RUN apt-get update \
     nodejs-legacy \
     && rm -fr /var/lib/apt/lists/*
 RUN npm install -g handlebars@1.3.0 uglifyjs
-RUN cpanm --notest --mirror http://www.cpan.org/ --mirror http://duckpan.org Dist::Zilla
+RUN cpanm --notest Dist::Zilla
 
 # Install DuckPAN 
-RUN cpanm --notest --skip-installed --mirror http://www.cpan.org/ --mirror http://duckpan.org App::DuckPAN 
+RUN cpanm --notest --skip-installed App::DuckPAN 
 
 # Install Dependencies for Spice and Goodies
 RUN git clone --depth=50 https://github.com/duckduckgo/zeroclickinfo-spice.git
